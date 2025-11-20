@@ -1,100 +1,259 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/1PLm_ov-)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=21741829&assignment_repo_type=AssignmentRepo)
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🚗 Parking API – NestJS + Prisma + MySQL
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+API sederhana untuk sistem parkir menggunakan **NestJS**, **Prisma ORM**, dan **MySQL**.
+Fitur:
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- Create data parkir
+- Update durasi & total otomatis
+- Hapus data parkir
+- Hitung total pendapatan
+- Search, filter, dan pagination
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 📦 **1. Tech Stack**
 
-## Project setup
+- **NestJS** (Framework Backend)
+- **Prisma ORM** (Database ORM)
+- **MySQL** (Database)
+- **TypeScript**
 
-```bash
-$ npm install
-```
+---
 
-## Compile and run the project
+# ⚙️ **2. Cara Instalasi**
+
+Pastikan kamu sudah menginstal:
+
+- Node.js ≥ v18
+- MySQL berjalan di lokal (port default 3306)
+
+---
+
+## 🔧 **Step-by-step**
+
+### **1. Clone Project**
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+git clone https://github.com/whyna-class/case-study-sistem-parkir-Alfareza-dev.git
+cd parking-api
 ```
 
-## Run tests
+### **2. Install Dependencies**
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm install
 ```
 
-## Deployment
+### **3. Setup Environment**
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+Buat file `.env`:
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+```
+DATABASE_URL="mysql://root@localhost:3306/parking"
+
+JWT_KEY=user123
+JWT_EXPIRATION=1440
+BASIC_AUTH_USERNAME=user
+BASIC_AUTH_PASSWORD=admin
+```
+
+> Pastikan database `parking` sudah dibuat.
+
+Jika belum, buat dengan:
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+mysql -u root -p -e "CREATE DATABASE parking;"
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+---
 
-## Resources
+### **4. Generate Prisma Client**
 
-Check out a few resources that may come in handy when working with NestJS:
+```bash
+npx prisma generate
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### **5. Jalankan Migrasi (jika ada perubahan schema)**
 
-## Support
+```bash
+npx prisma migrate dev --name init
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+---
 
-## Stay in touch
+### **6. Jalankan Aplikasi**
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+npm run start:dev
+```
 
-## License
+By default aplikasi berjalan di:
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```
+http://localhost:3000
+```
+
+---
+
+# 📚 **3. Endpoint API (Postman Ready)**
+
+Base URL:
+
+```
+http://localhost:3000
+```
+
+---
+
+## 🔵 **1. Create Parkir**
+
+**POST /parkir**
+
+**Body (JSON)**:
+
+```json
+{
+  "plat_nomor": "L1234AB",
+  "jenis_kendaraan": "roda2",
+  "durasi": 3
+}
+```
+
+---
+
+## 🟢 **2. Get Semua Parkir**
+
+**GET /parkir**
+
+Support:
+
+- Pagination → `?page=1&limit=10`
+- Search → `?search=L12`
+- Filter jenis → `?jenis_kendaraan=roda4`
+
+Contoh:
+
+```
+GET /parkir?page=1&limit=5&search=L1
+```
+
+---
+
+## 🟠 **3. Get Parkir by ID**
+
+**GET /parkir/:id**
+
+Contoh:
+
+```
+GET /parkir/1
+```
+
+---
+
+## 🟣 **4. Update Parkir**
+
+**PATCH /parkir/:id**
+
+Update durasi atau jenis kendaraan:
+
+```json
+{
+  "durasi": 5
+}
+```
+
+---
+
+## 🔴 **5. Hapus Parkir**
+
+**DELETE /parkir/:id**
+
+Contoh:
+
+```
+DELETE /parkir/1
+```
+
+---
+
+## 💰 **6. Total Pendapatan**
+
+**GET /parkir/total/pendapatan**
+
+Response:
+
+```json
+{
+  "total_pendapatan": 14000
+}
+```
+
+---
+
+# 🗂️ **4. Struktur Folder**
+
+```
+src/
+│── app.module.ts
+│── main.ts
+│── prisma/
+│   ├── prisma.service.ts
+│   └── prisma.module.ts
+│── parking/
+│   ├── parking.controller.ts
+│   ├── parking.service.ts
+│   ├── dto/
+│   │   ├── create-parking.dto.ts
+│   │   └── update-parking.dto.ts
+```
+
+---
+
+# 🛠️ **5. Prisma Schema**
+
+File: `prisma/schema.prisma`
+
+```prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum jenisKendaraan {
+  RODA2
+  RODA4
+}
+
+model Parking {
+  id             Int            @id @default(autoincrement())
+  platNomor      String
+  jenisKendaraan jenisKendaraan
+  entryTime      DateTime
+  exitTime       DateTime?
+  durasi         Int?
+  total          Int?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+}
+```
+
+---
+
+# ✅ **6. Menjalankan Prisma Studio (Optional)**
+
+Untuk melihat data di database lewat UI:
+
+```bash
+npx prisma studio
+```
+
+---
+
+# 🎉 **7. Selesai!**
+
+API sudah siap dijalankan dan dites melalui Postman.
